@@ -1,5 +1,5 @@
-const SH_CLIENT_ID     = 'sh-802b3f04-37c6-4261-b4de-d512b962ce05';
-const SH_CLIENT_SECRET = 'vvWEqXB9cnTUQWyP5M6ML9qaHuwsBmvv';
+const SH_CLIENT_ID     = 'sh-7225509d-7ed7-4a3b-bcb0-8e896902a25c';
+const SH_CLIENT_SECRET = 'KPHRSgnSJAHW4v8Cn7qBe7UfN4xGj2qt';
 
 let _token = null, _tokenExp = 0;
 
