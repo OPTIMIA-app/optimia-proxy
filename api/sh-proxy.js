@@ -1,9 +1,11 @@
-const SH_CLIENT_ID     = 'sh-7225509d-7ed7-4a3b-bcb0-8e896902a25c';
-const SH_CLIENT_SECRET = 'KPHRSgnSJAHW4v8Cn7qBe7UfN4xGj2qt';
+const SH_CLIENT_ID     = process.env.SH_CLIENT_ID;
+const SH_CLIENT_SECRET = process.env.SH_CLIENT_SECRET;
 
 let _token = null, _tokenExp = 0;
-
 async function getToken() {
+  if (!SH_CLIENT_ID || !SH_CLIENT_SECRET) {
+    throw new Error('Faltan las variables de entorno SH_CLIENT_ID / SH_CLIENT_SECRET en Vercel');
+  }
   if (_token && Date.now() < _tokenExp - 60000) return _token;
   const resp = await fetch(
     'https://identity.dataspace.copernicus.eu/auth/realms/CDSE/protocol/openid-connect/token',
@@ -101,7 +103,6 @@ export default async function handler(req, res) {
     }
 
     res.status(400).json({ error: 'Acción desconocida: ' + action });
-
   } catch(e) {
     console.error('[sh-proxy] exception:', e.message);
     res.status(500).json({ error: String(e) });
